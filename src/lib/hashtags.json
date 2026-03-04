@@ -1,0 +1,32 @@
+{
+  "categories": [
+    {
+      "name": "trending",
+      "hashtags": ["#instagood", "#love", "#follow", "#like", "#photooftheday", "#picoftheday", "#instadaily", "#beautiful", "#art", "#style", "#happy", "#cute", "#explorepage", "#viral", "#meme"]
+    },
+    {
+      "name": "drinks",
+      "hashtags": ["#drinks", "#cocktails", "#bar", "#drink", "#cocktail", "#food", "#wine", "#foodie", "#beer", "#mixology", "#bartender", "#drinkstagram", "#happyhour", "#instagood", "#love", "#party", "#coffee", "#foodporn"]
+    },
+    {
+      "name": "snacks",
+      "hashtags": ["#snacks", "#food", "#foodie", "#snack", "#yummy", "#foodporn", "#instafood", "#snacktime", "#foodphotography", "#delicious", "#homemade", "#healthyfood", "#chocolate", "#foodstagram", "#tasty", "#foodblogger", "#healthy", "#love"]
+    },
+    {
+      "name": "photography",
+      "hashtags": ["#photography", "#photooftheday", "#instagood", "#picoftheday", "#photo", "#instadaily", "#photographer", "#beautiful", "#art", "#love", "#nature", "#travel", "#landscape", "#sunset", "#portrait", "#shotoniphone", "#canon", "#nikon"]
+    },
+    {
+      "name": "tech",
+      "hashtags": ["#tech", "#technology", "#innovation", "#engineering", "#iphone", "#apple", "#gadgets", "#software", "#developer", "#coding", "#ai", "#artificialintelligence", "#future", "#technews", "#programming", "#instatech", "#gadget", "#techie"]
+    },
+    {
+      "name": "fashion",
+      "hashtags": ["#fashion", "#style", "#love", "#instagood", "#like", "#ootd", "#fashionblogger", "#model", "#photography", "#beautiful", "#photooftheday", "#beauty", "#instafashion", "#follow", "#art", "#outfitoftheday", "#streetstyle"]
+    },
+    {
+      "name": "nature",
+      "hashtags": ["#nature", "#naturephotography", "#travel", "#landscape", "#photography", "#beautiful", "#love", "#photooftheday", "#instagood", "#wildlife", "#earth", "#naturelovers", "#adventure", "#flowers", "#picoftheday", "#sky", "#explore", "#mountains"]
+    }
+  ]
+}
