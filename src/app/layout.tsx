@@ -7,8 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 const siteConfig = {
   name: 'CreatorKit',
   description: 'A free micro-toolkit for modern creators. Compress images, generate AI hashtags, crop photos, and convert formats—all in your browser.',
-  url: 'https://creatorkit.app',
-  ogImage: 'https://creatorkit.app/og.png', // Create this image and place it in the /public folder
+  url: 'https://kitt-kappa.vercel.app',
+  ogImage: 'https://kitt-kappa.vercel.app/og.png', // Create this image and place it in the /public folder
   twitterHandle: '@yourhandle',
 };
 
