@@ -1,7 +1,6 @@
 import { ArrowRight, Image, Hash, Crop, Repeat } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import AdBanner from "@/components/AdBanner";
 import { cn } from "@/lib/utils";
 
 const tools = [
@@ -35,7 +34,7 @@ export default function Home() {
   return (
     <>
       <header className="p-4 border-b border-border/50">
-        <AdBanner />
+        {/* Ad space can be placed here if needed in the future */}
       </header>
       <main className="flex-1 p-4 md:p-8">
         <div className="max-w-4xl mx-auto">

@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from '@/hooks/use-toast';
-import AdBanner from '@/components/AdBanner';
 import hashtagData from '@/lib/hashtags.json';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
@@ -165,8 +164,7 @@ export default function HashtagGeneratorClient() {
           )}
         </CardContent>
       </Card>
-      {hashtags.length > 0 && <AdBanner />}
-
+      
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
           <h2 className="text-2xl font-semibold text-foreground">Boost Your Social Media with the Right Hashtags</h2>
           <p>In today's fast-paced social media landscape, visibility is key. Hashtags are one of the most powerful tools at your disposal to cut through the noise, reach a wider audience, and increase engagement. The right combination of hashtags can connect your content with users who are actively looking for what you offer, whether it's a product, a service, or a unique perspective. However, manually researching and selecting the most effective hashtags is time-consuming and often based on guesswork. This is where our AI Hashtag Generator comes in.</p>

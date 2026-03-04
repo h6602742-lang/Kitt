@@ -11,7 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import { FileUploader } from '@/components/FileUploader';
 import { getCroppedImg } from './canvasUtils';
 import 'react-easy-crop/react-easy-crop.css';
-import AdBanner from '@/components/AdBanner';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const aspectRatios = [
@@ -172,7 +171,6 @@ export default function SmartCropperClient() {
             <Button onClick={handleDownload} className="w-full">
               <Download className="mr-2 h-4 w-4" /> Download Cropped Image
             </Button>
-             <AdBanner />
           </CardContent>
         </Card>
       )}

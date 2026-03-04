@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import MonetagAd from '@/components/MonetagAd';
 
 export default function ToolsLayout({
   children,
@@ -20,6 +21,7 @@ export default function ToolsLayout({
       </header>
       <main className="flex-1 p-4 md:p-8">
         {children}
+        <MonetagAd />
       </main>
     </div>
   );

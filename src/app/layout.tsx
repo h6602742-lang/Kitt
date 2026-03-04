@@ -22,7 +22,10 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   manifest: '/manifest.json',
-
+  // Monetag Verification
+  other: {
+    "monetag": "YOUR_VERIFICATION_ID",
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -64,9 +67,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
+        {/* Monetag MultiTag Script */}
         <Script
-          id="adsterra-popunder"
-          src="https://www.effectivecreativeformat.com/YOUR_POP_UNDER_ID_HERE/invoke.js"
+          id="monetag-multitag"
+          src="https://alwingulla.com/act/files/tag.min.js?z=YOUR_ZONE_ID"
           strategy="afterInteractive"
         />
       </head>

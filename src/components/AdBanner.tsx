@@ -11,8 +11,8 @@ const AdBanner = ({ className }: { className?: string }) => {
 
   useEffect(() => {
     const banner = bannerRef.current;
-    // Ensure the script only runs once
-    if (banner && banner.children.length === 0) {
+    // Ensure the script only runs once and on the client
+    if (banner && banner.children.length === 0 && typeof window !== 'undefined') {
         const confScript = document.createElement('script');
         confScript.type = 'text/javascript';
         confScript.innerHTML = `

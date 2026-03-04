@@ -9,7 +9,6 @@ import { useToast } from '@/hooks/use-toast';
 import NextImage from 'next/image';
 import { FileUploader } from '@/components/FileUploader';
 import { formatBytes } from '@/lib/utils';
-import AdBanner from '@/components/AdBanner';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 type ConvertedResult = {
@@ -163,7 +162,6 @@ export default function FormatConverterClient() {
             <Button onClick={handleDownload} className="w-full">
               <Download className="mr-2 h-4 w-4" /> Download
             </Button>
-            <AdBanner />
           </CardContent>
         </Card>
       )}

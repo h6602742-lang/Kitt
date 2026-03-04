@@ -11,7 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import NextImage from 'next/image';
 import { FileUploader } from '@/components/FileUploader';
 import { formatBytes } from '@/lib/utils';
-import AdBanner from '@/components/AdBanner';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 
@@ -186,8 +185,7 @@ export default function ImageCompressorClient() {
           )}
         </CardContent>
       </Card>
-      {compressedResult && <AdBanner />}
-
+      
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
         <h2 className="text-2xl font-semibold text-foreground">Optimize Your Web Vitals with Smart Image Compression</h2>
         <p>In the digital age, website speed is not a luxury—it's a necessity. Large, unoptimized images are one of the biggest culprits behind slow-loading pages, leading to poor user experience, high bounce rates, and lower search engine rankings. Our free Image Compressor tool is designed to solve this problem by intelligently reducing the file size of your images without sacrificing visual quality. By finding the perfect balance between size and quality, you can significantly improve your site's performance and Core Web Vitals, providing a faster, smoother experience for your visitors.</p>
