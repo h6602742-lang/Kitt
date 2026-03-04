@@ -64,7 +64,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
-         {/* Google AdSense Script - Replace NEXT_PUBLIC_ADSENSE_CLIENT_ID with your actual ID */}
+         {/* Google AdSense Script. The client ID is set in the .env file. */}
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
           <Script
             async
