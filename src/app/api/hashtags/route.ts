@@ -4,7 +4,7 @@ const HUGGING_FACE_URL = "https://api-inference.huggingface.co/models/mistralai/
 
 export async function POST(request: Request) {
   const { keyword } = await request.json();
-  const apiToken = process.env.NEXT_PUBLIC_HF_TOKEN;
+  const apiToken = process.env.HUGGING_FACE_API_KEY;
 
   if (!keyword) {
     return NextResponse.json({ error: 'Keyword is required' }, { status: 400 });

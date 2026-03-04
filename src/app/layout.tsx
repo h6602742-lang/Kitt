@@ -22,10 +22,6 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   manifest: '/manifest.json',
-  // Monetag Verification
-  other: {
-    "monetag": "a95b02f7856ca57d18cfdebf4f8978f3",
-  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -67,12 +63,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
-        {/* Monetag MultiTag Script */}
-        <Script
-          id="monetag-multitag"
-          src="https://alwingulla.com/act/files/tag.min.js?z=YOUR_ZONE_ID"
-          strategy="afterInteractive"
-        />
+        <Script 
+           src="https://quge5.com/88/tag.min.js" 
+           data-zone="216388" 
+           strategy="afterInteractive" 
+           data-cfasync="false" 
+         />
       </head>
       <body className="font-body antialiased">
         <div className="flex flex-col min-h-screen">
