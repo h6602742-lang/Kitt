@@ -1,79 +1,76 @@
 import { NextResponse } from 'next/server';
+import { getHashtags } from '@/lib/hashtag-engine';
 
-const HUGGING_FACE_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3";
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+
+function getFallbackHashtags(): string[] {
+  // The existing engine provides trending hashtags by default, which is a perfect fallback.
+  return getHashtags('trending', 15);
+}
 
 export async function POST(request: Request) {
   const { keyword } = await request.json();
-  const apiToken = process.env.HUGGING_FACE_API_KEY;
+  const apiToken = process.env.GROQ_API_KEY;
 
-  if (!keyword) {
-    return NextResponse.json({ error: 'Keyword is required' }, { status: 400 });
+  if (!keyword?.trim()) {
+    return NextResponse.json({ hashtags: getFallbackHashtags() });
   }
 
-  if (!apiToken || !apiToken.startsWith('hf_')) {
-    console.error('Hugging Face API token is missing or invalid.');
-    return NextResponse.json({ error: 'API token is not configured correctly on the server.' }, { status: 500 });
+  // If the API token is missing on the server, return fallback hashtags silently.
+  if (!apiToken || !apiToken.startsWith('gsk_')) {
+    console.error('Groq API token is missing or invalid. Returning fallback hashtags.');
+    return NextResponse.json({ hashtags: getFallbackHashtags() });
   }
 
-  const prompt = `Act as a social media expert. Generate 10 trending and relevant hashtags for the keyword: "${keyword}". Return ONLY the hashtags separated by spaces. Do not include any other text, explanation, or the '#' symbol.`;
-  
-  const maxRetries = 3;
-  let lastError: any = null;
+  const prompt = `You are a viral social media expert. Generate 15 trending and relevant hashtags for the keyword: "${keyword}". Your response MUST be a single string of words separated by spaces. Do not include any other text, explanations, or the '#' symbol. For example: "hashtag1 hashtag2 hashtag3"`;
 
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const response = await fetch(HUGGING_FACE_URL, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiToken.trim()}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          inputs: prompt,
-          options: {
-            wait_for_model: true,
-            use_cache: false,
-          },
-        }),
-      });
+  try {
+    const response = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${apiToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7,
+        max_tokens: 100,
+        stream: false,
+      }),
+    });
 
-      if (response.status === 503 && i < maxRetries - 1) {
-        await new Promise(res => setTimeout(res, 8000));
-        continue;
-      }
-
-      if (!response.ok) {
-        const errorBody = await response.json().catch(() => ({}));
-        throw new Error(`API request failed with status ${response.status}: ${errorBody.error || response.statusText}`);
-      }
-      
-      const result = await response.json();
-      
-      if (!Array.isArray(result) || !result[0]?.generated_text) {
-        throw new Error("Invalid response format from AI service.");
-      }
-
-      const generatedText = result[0].generated_text;
-      const aiResponse = generatedText.split(prompt).pop() || '';
-      
-      const hashtags = aiResponse
-        .trim()
-        .split(/\s+/)
-        .map(tag => tag.replace(/[^a-zA-Z0-9]/g, ''))
-        .filter(tag => tag.length > 1 && !/^\d+$/.test(tag))
-        .map(tag => `#${tag}`);
-
-      if (hashtags.length > 0 && hashtags[0] !== '#') {
-        return NextResponse.json({ hashtags: hashtags.filter(tag => tag.length > 2) });
-      } else {
-        throw new Error("AI returned invalid or empty hashtags.");
-      }
-
-    } catch (e: any) {
-        lastError = e;
-        console.error(`Hashtag generation attempt ${i + 1} failed:`, e.message);
+    if (!response.ok) {
+      console.error(`Groq API request failed with status ${response.status}. Returning fallback.`);
+      return NextResponse.json({ hashtags: getFallbackHashtags() });
     }
-  }
 
-  return NextResponse.json({ error: `Failed to generate hashtags after ${maxRetries} attempts. Please try again later.` }, { status: 500 });
+    const result = await response.json();
+    const aiResponse = result.choices?.[0]?.message?.content;
+
+    if (!aiResponse) {
+      console.error("Invalid response format from Groq API. Returning fallback.");
+      return NextResponse.json({ hashtags: getFallbackHashtags() });
+    }
+
+    const hashtags = aiResponse
+      .trim()
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(tag => tag.length > 2)
+      .map(tag => `#${tag.replace(/[^a-z0-9]/g, '')}`)
+      .filter(tag => tag.length > 1);
+
+    if (hashtags.length === 0) {
+      console.warn("AI returned empty or invalid hashtags. Using fallback.");
+      return NextResponse.json({ hashtags: getFallbackHashtags() });
+    }
+
+    return NextResponse.json({ hashtags });
+
+  } catch (e: any) {
+    console.error("An unexpected error occurred while calling Groq API:", e.message);
+    // If any other error occurs, return high-quality fallback hashtags.
+    return NextResponse.json({ hashtags: getFallbackHashtags() });
+  }
 }
