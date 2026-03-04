@@ -64,15 +64,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
-         {/* Google AdSense Script. The client ID is set in the .env file. */}
-        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
-          <Script
+        <Script
             async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4532591852516345"
             crossOrigin="anonymous"
             strategy="afterInteractive"
-          />
-        )}
+        />
       </head>
       <body className="font-body antialiased">
         <div className="flex flex-col min-h-screen">
