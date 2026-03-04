@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       <header className="p-4 border-b border-border/50">
-        <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />
+        <AdBanner />
       </header>
       <main className="flex-1 p-4 md:p-8">
         <div className="max-w-4xl mx-auto">

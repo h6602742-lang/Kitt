@@ -172,7 +172,7 @@ export default function SmartCropperClient() {
             <Button onClick={handleDownload} className="w-full">
               <Download className="mr-2 h-4 w-4" /> Download Cropped Image
             </Button>
-             <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />
+             <AdBanner />
           </CardContent>
         </Card>
       )}

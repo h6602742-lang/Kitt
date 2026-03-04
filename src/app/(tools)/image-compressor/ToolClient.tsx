@@ -186,7 +186,7 @@ export default function ImageCompressorClient() {
           )}
         </CardContent>
       </Card>
-      {compressedResult && <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />}
+      {compressedResult && <AdBanner />}
 
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
         <h2 className="text-2xl font-semibold text-foreground">Optimize Your Web Vitals with Smart Image Compression</h2>

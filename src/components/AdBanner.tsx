@@ -1,79 +1,50 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
-type AdBannerProps = {
-  className?: string;
-  dataAdSlot: string;
-  dataAdFormat?: 'auto' | 'rectangle' | 'vertical' | 'horizontal';
-  dataFullWidthResponsive?: 'true' | 'false';
-};
+// This is a placeholder for your real Adsterra banner key
+const ADSTERRA_BANNER_KEY = 'YOUR_BANNER_KEY_HERE';
 
-declare global {
-  interface Window {
-    adsbygoogle?: { [key: string]: unknown }[];
-  }
-}
-
-const AdBanner = ({
-  className,
-  dataAdSlot,
-  dataAdFormat = 'auto',
-  dataFullWidthResponsive = 'true',
-}: AdBannerProps) => {
-  const adClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-  const pathname = usePathname();
-  const adRef = useRef<HTMLModElement>(null);
+const AdBanner = ({ className }: { className?: string }) => {
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (adClient && adRef.current) {
-        // Strict null check and status check to prevent duplicate push
-        if (adRef.current.innerHTML === "" && adRef.current.getAttribute("data-ad-status") !== "filled") {
-            try {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-                // Mark as filled
-                adRef.current.setAttribute("data-ad-status", "filled");
-            } catch (err) {
-                console.error('AdSense push error:', err);
-            }
-        }
-    }
-  }, [pathname, adClient]);
+    const banner = bannerRef.current;
+    // Ensure the script only runs once
+    if (banner && banner.children.length === 0) {
+        const confScript = document.createElement('script');
+        confScript.type = 'text/javascript';
+        confScript.innerHTML = `
+          atOptions = {
+            'key' : '${ADSTERRA_BANNER_KEY}',
+            'format' : 'iframe',
+            'height' : 90,
+            'width' : 728,
+            'params' : {}
+          };
+        `;
 
-  if (!adClient || !dataAdSlot) {
-    return (
-      <div
-        className={cn(
-          // Ensure consistent min-height to prevent CLS
-          "flex items-center justify-center min-h-[100px] w-full bg-muted/20 border border-dashed border-border rounded-lg text-muted-foreground",
-          className
-        )}
-      >
-        <p>Ad Placeholder (Ad not configured)</p>
-      </div>
-    );
-  }
+        const adScript = document.createElement('script');
+        adScript.type = 'text/javascript';
+        adScript.src = `//www.effectivecreativeformat.com/${ADSTERRA_BANNER_KEY}/invoke.js`;
+        
+        banner.appendChild(confScript);
+        banner.appendChild(adScript);
+    }
+  }, []);
 
   return (
     <div
-      // Using pathname as a key ensures a fresh component on route change
-      key={pathname}
-      className={cn(
-        "flex items-center justify-center w-full min-h-[100px] bg-muted/20 text-muted-foreground overflow-hidden rounded-lg",
-        className
-      )}
+        ref={bannerRef}
+        className={cn(
+            "mx-auto my-4 flex items-center justify-center min-h-[90px] w-full max-w-[728px]",
+            "bg-muted/20 border border-dashed border-border rounded-lg text-muted-foreground",
+            className
+        )}
     >
-      <ins
-        ref={adRef}
-        className="adsbygoogle"
-        style={{ display: 'block', width: '100%' }}
-        data-ad-client={adClient}
-        data-ad-slot={dataAdSlot}
-        data-ad-format={dataAdFormat}
-        data-full-width-responsive={dataFullWidthResponsive}
-      ></ins>
+      {/* Ad will be injected here by the script */}
+      <p>Advertisement</p>
     </div>
   );
 };

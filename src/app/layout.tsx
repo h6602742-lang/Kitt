@@ -65,10 +65,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
         <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4532591852516345"
-            crossOrigin="anonymous"
-            strategy="afterInteractive"
+          id="adsterra-popunder"
+          src="https://www.effectivecreativeformat.com/YOUR_POP_UNDER_ID_HERE/invoke.js"
+          strategy="afterInteractive"
         />
       </head>
       <body className="font-body antialiased">

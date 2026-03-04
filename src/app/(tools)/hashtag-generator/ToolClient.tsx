@@ -165,7 +165,7 @@ export default function HashtagGeneratorClient() {
           )}
         </CardContent>
       </Card>
-      {hashtags.length > 0 && <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />}
+      {hashtags.length > 0 && <AdBanner />}
 
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
           <h2 className="text-2xl font-semibold text-foreground">Boost Your Social Media with the Right Hashtags</h2>
