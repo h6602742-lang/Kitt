@@ -100,7 +100,7 @@ export default function FormatConverterClient() {
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
           name: 'Image Format Converter',
-          description: 'Convert images to modern formats like WebP, PNG, or JPG for any use case, from web optimization to compatibility.',
+          description: 'A free online tool to convert images to modern formats like WebP, PNG, or JPG for web optimization and compatibility.',
           applicationCategory: 'MultimediaApplication',
           operatingSystem: 'Web',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -167,36 +167,25 @@ export default function FormatConverterClient() {
       )}
 
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
-        <h2 className="text-2xl font-semibold text-foreground">Why Convert Image Formats?</h2>
-        <p>In the digital world, images are everything. They capture attention, convey messages, and enhance user experience. However, not all image formats are created equal. The format you choose can significantly impact your website’s performance, loading speed, and overall visual quality. Our Image Format Converter is a powerful, free tool designed to help you optimize your images for any use case by converting them to modern, efficient formats like WebP, PNG, or the universally compatible JPG.</p>
-        
-        <h3 className="text-xl font-semibold text-foreground">The Power of WebP</h3>
-        <p>WebP is a next-generation image format developed by Google that offers both lossless and lossy compression. This means you can achieve significantly smaller file sizes—often 25-35% smaller than JPEGs—without a noticeable drop in quality. For web developers and content creators, this is a game-changer. Smaller images lead to faster page load times, which directly improves user experience and search engine rankings (SEO). Our converter makes it simple to switch your existing JPEGs and PNGs to WebP, giving your website an instant performance boost.</p>
+        <h2 className="text-2xl font-semibold text-foreground">How to Convert Images to WebP for Better Performance</h2>
+        <p>
+          In the competitive digital landscape, website speed is paramount. Large image files are a primary cause of slow load times, which can negatively affect user experience and SEO rankings. Converting your images to a modern format like WebP can drastically reduce file size without a noticeable loss in quality. This guide will walk you through how to use our free online tool to do just that.
+        </p>
 
-        <h3 className="text-xl font-semibold text-foreground">When to Use PNG and JPG</h3>
-        <p>While WebP is excellent for the web, PNG and JPG still have their places. PNG (Portable Network Graphics) is the go-to format for images that require transparency, such as logos, icons, and graphics with non-rectangular shapes. Its lossless compression ensures that every pixel is preserved, making it ideal for detailed graphics. JPG (or JPEG) remains the universal standard for photographs. Its lossy compression algorithm is incredibly effective at reducing the file size of complex images with many colors, making it perfect for sharing photos online or via email where compatibility is key.</p>
-        
-        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-                <AccordionTrigger>Is this image converter tool free to use?</AccordionTrigger>
-                <AccordionContent>
-                    Yes, absolutely. Our image format converter is completely free to use with no limits. You can convert as many images as you need, directly in your browser.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-                <AccordionTrigger>Is it safe to upload my images here?</AccordionTrigger>
-                <AccordionContent>
-                    Yes, your privacy is our priority. All image processing happens directly in your browser. Your files are never uploaded to our servers, ensuring your data remains private and secure.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-                <AccordionTrigger>What is the best format for my website?</AccordionTrigger>
-                <AccordionContent>
-                    For most web use cases, WebP is the best choice due to its superior compression and quality. It leads to faster load times, which is great for SEO and user experience. Use PNG for images requiring transparency (like logos) and JPG for universal compatibility with older devices.
-                </AccordionContent>
-            </AccordionItem>
-        </Accordion>
+        <h3 className="text-xl font-semibold text-foreground">Step 1: Select Your Image File</h3>
+        <p>
+          Begin by dragging and dropping your image file (PNG, JPG, etc.) into the upload area, or simply click to select a file from your computer. Our tool is entirely browser-based, meaning your file is never uploaded to a server. This ensures your data remains private and secure throughout the entire process. You’ll instantly see a preview of your original image and its file size.
+        </p>
+
+        <h3 className="text-xl font-semibold text-foreground">Step 2: Choose Your Target Format (WebP)</h3>
+        <p>
+          Next, use the dropdown menu to select your desired output format. For web use, we highly recommend choosing 'WebP'. This next-generation format developed by Google provides superior compression, resulting in significantly smaller file sizes compared to traditional formats. This is a key factor in improving your Google PageSpeed Insights score.
+        </p>
+
+        <h3 className="text-xl font-semibold text-foreground">Step 3: Convert and Download</h3>
+        <p>
+          Click the 'Convert' button. Our tool will process the image instantly. A preview of the newly converted image will appear, along with its new, smaller file size. You'll often see a size reduction of 25-50% or more. Click 'Download' to save the optimized image to your device, ready to be uploaded to your website for a faster, better user experience.
+        </p>
       </article>
     </div>
   );

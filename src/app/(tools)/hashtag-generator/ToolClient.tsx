@@ -96,7 +96,7 @@ export default function HashtagGeneratorClient() {
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
           name: 'AI Hashtag Generator',
-          description: 'Generate relevant and trending hashtags for your social media posts using AI. Boost your reach and engagement.',
+          description: 'A free AI tool to generate relevant and trending hashtags for social media posts on Instagram, TikTok, and more to boost reach.',
           applicationCategory: 'DesignApplication',
           operatingSystem: 'Web',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -166,36 +166,25 @@ export default function HashtagGeneratorClient() {
       </Card>
       
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
-          <h2 className="text-2xl font-semibold text-foreground">Boost Your Social Media with the Right Hashtags</h2>
-          <p>In today's fast-paced social media landscape, visibility is key. Hashtags are one of the most powerful tools at your disposal to cut through the noise, reach a wider audience, and increase engagement. The right combination of hashtags can connect your content with users who are actively looking for what you offer, whether it's a product, a service, or a unique perspective. However, manually researching and selecting the most effective hashtags is time-consuming and often based on guesswork. This is where our AI Hashtag Generator comes in.</p>
+        <h2 className="text-2xl font-semibold text-foreground">How to Find Trending Hashtags with AI</h2>
+        <p>
+          Hashtags are essential for discoverability on platforms like Instagram, TikTok, and X. But finding the right ones can be a guessing game. A good strategy involves mixing popular, high-volume tags with niche, community-specific ones. Our free AI Hashtag Generator automates this process, helping you reach a wider, more relevant audience. This guide shows you how to get the most out of it.
+        </p>
+        
+        <h3 className="text-xl font-semibold text-foreground">Step 1: Enter Your Core Keyword</h3>
+        <p>
+          Start by typing a core topic or keyword related to your post into the input field. Be specific. Instead of "food," try "vegan pasta recipe" or "spicy chicken sandwich." The more context you give the AI, the more tailored and effective your hashtag suggestions will be. Our tool is designed to understand the nuances of your content.
+        </p>
 
-          <h3 className="text-xl font-semibold text-foreground">How Does AI Revolutionize Hashtag Strategy?</h3>
-          <p>Our tool leverages the power of artificial intelligence to analyze your target keyword and generate a curated list of relevant and trending hashtags in seconds. Instead of just suggesting broad, generic tags, our AI understands context and semantics. It identifies a mix of popular, niche, and long-tail hashtags to maximize your reach. Popular tags get you in front of a large audience, while niche tags connect you with a more targeted, engaged community that is more likely to convert. This balanced approach ensures your content doesn't just get seen—it gets seen by the right people.</p>
+        <h3 className="text-xl font-semibold text-foreground">Step 2: Analyze the AI-Generated Suggestions</h3>
+        <p>
+          Click "Generate with AI." In seconds, our tool will provide a list of suggested hashtags. You'll see a mix of types: broad tags like #foodie to reach a large audience, and more specific ones like #VeganMealPrep to connect with a dedicated community. This balanced approach is key to an effective hashtag strategy, helping you avoid getting lost in oversized trends.
+        </p>
 
-          <h3 className="text-xl font-semibold text-foreground">A Data-Driven Approach to Engagement</h3>
-          <p>Stop throwing hashtags at the wall and hoping they stick. Our AI Hashtag Generator provides a data-driven strategy to elevate your social media game. By simply entering a keyword related to your post, you'll receive a diverse set of suggestions that are optimized for platforms like Instagram, TikTok, X (formerly Twitter), and LinkedIn. Whether you're a small business owner, a content creator, or a marketing professional, this free tool will save you valuable time and provide the insights you need to grow your online presence, foster a community, and achieve your social media goals.</p>
-
-          <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-          <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1">
-                  <AccordionTrigger>Is the AI Hashtag Generator free?</AccordionTrigger>
-                  <AccordionContent>
-                      Yes, our tool is 100% free to use. Our goal is to provide creators and businesses with powerful, accessible tools to help them succeed. There are no hidden fees or usage limits.
-                  </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                  <AccordionTrigger>How many hashtags should I use on my posts?</AccordionTrigger>
-                  <AccordionContent>
-                      The optimal number varies by platform. For Instagram, it's common to use between 10 and 30 hashtags. For platforms like X or Facebook, 2-3 highly relevant hashtags are often more effective. Our tool provides a generous list so you can pick the most relevant ones for your specific post and platform.
-                  </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                  <AccordionTrigger>Does the AI suggest hashtags for different languages?</AccordionTrigger>
-                  <AccordionContent>
-                      Currently, our AI is optimized for English keywords and hashtags. However, it can often recognize popular brand names or terms from other languages. We are working on expanding our multilingual capabilities in the future.
-                  </AccordionContent>
-              </AccordionItem>
-          </Accordion>
+        <h3 className="text-xl font-semibold text-foreground">Step 3: Copy and Paste to Your Social Media</h3>
+        <p>
+          Once you're happy with the list, simply click the "Copy All" button. This copies all the generated hashtags to your clipboard, perfectly formatted with spaces. You can then paste them directly into your Instagram caption, TikTok description, or X post. It's a simple, three-step process to save time and significantly boost your content's reach and engagement.
+        </p>
       </article>
     </div>
   );

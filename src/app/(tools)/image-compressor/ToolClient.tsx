@@ -106,8 +106,8 @@ export default function ImageCompressorClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'Image Compressor',
-          description: 'Compress and optimize your images. Reduce file size without losing quality for faster web performance.',
+          name: 'Free Image Compressor',
+          description: 'A free online tool to compress and optimize images, reducing file size for faster web performance without losing quality.',
           applicationCategory: 'MultimediaApplication',
           operatingSystem: 'Web',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -187,36 +187,25 @@ export default function ImageCompressorClient() {
       </Card>
       
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
-        <h2 className="text-2xl font-semibold text-foreground">Optimize Your Web Vitals with Smart Image Compression</h2>
-        <p>In the digital age, website speed is not a luxury—it's a necessity. Large, unoptimized images are one of the biggest culprits behind slow-loading pages, leading to poor user experience, high bounce rates, and lower search engine rankings. Our free Image Compressor tool is designed to solve this problem by intelligently reducing the file size of your images without sacrificing visual quality. By finding the perfect balance between size and quality, you can significantly improve your site's performance and Core Web Vitals, providing a faster, smoother experience for your visitors.</p>
-        
-        <h3 className="text-xl font-semibold text-foreground">How Does Image Compression Work?</h3>
-        <p>Our tool uses advanced lossy compression algorithms to analyze your image and discard redundant data that is imperceptible to the human eye. You have full control over the level of compression via a simple quality slider. A lower quality setting will result in a smaller file size, but may introduce minor artifacts, while a higher quality setting will preserve more detail at the cost of a larger file. This allows you to make informed decisions based on your specific needs, whether you're optimizing a hero image for your homepage or a gallery of product photos. The entire process happens in your browser, ensuring your images remain private and secure.</p>
-        
-        <h3 className="text-xl font-semibold text-foreground">The Impact on SEO and User Engagement</h3>
-        <p>Search engines like Google use page speed as a key ranking factor. A faster website is more likely to rank higher in search results, driving more organic traffic. Furthermore, a quick-loading site keeps users engaged. Studies have shown that even a one-second delay in page load time can lead to a significant drop in conversions. By using our Image Compressor, you're not just making files smaller; you're investing in better SEO, higher user engagement, and a more professional online presence. It's a simple, free step with a massive return on investment for any website owner, blogger, or e-commerce store.</p>
+        <h2 className="text-2xl font-semibold text-foreground">How to Reduce Image Size for the Web</h2>
+        <p>
+          Page speed is a critical ranking factor for Google and essential for keeping users engaged. Large images are the number one cause of slow websites. Compressing your images before uploading them can dramatically improve performance. This guide shows you how to use this free tool to reduce image file sizes quickly and effectively.
+        </p>
 
-        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-                <AccordionTrigger>What is the maximum file size I can upload?</AccordionTrigger>
-                <AccordionContent>
-                    Our tool is designed to handle most common image sizes. While there isn't a strict limit, performance may vary with extremely large files (e.g., over 20MB). For best results, we recommend using images under 10MB.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-                <AccordionTrigger>Does compressing an image reduce its quality?</AccordionTrigger>
-                <AccordionContent>
-                    Our tool uses "lossy" compression, which means some data is removed to reduce file size. However, you have control over the quality setting. At a high quality setting (e.g., 70-90), the difference in visual quality is often imperceptible to the human eye, while the file size reduction can be substantial.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-                <AccordionTrigger>Are my images stored on your server?</AccordionTrigger>
-                <AccordionContent>
-                    No. All compression is performed locally in your web browser. Your images are never uploaded to our servers, ensuring your data remains 100% private and secure. You can use our tool with complete peace of mind.
-                </AccordionContent>
-            </AccordionItem>
-        </Accordion>
+        <h3 className="text-xl font-semibold text-foreground">Step 1: Upload Your Image</h3>
+        <p>
+          Drag and drop your JPG, PNG, or WebP file into the upload box, or click to select it from your device. The entire process happens in your browser, so your images are never sent to a server. This guarantees your privacy. You will immediately see a preview of your original image on the left.
+        </p>
+        
+        <h3 className="text-xl font-semibold text-foreground">Step 2: Adjust the Compression Quality</h3>
+        <p>
+          Use the 'Quality' slider to find the perfect balance between file size and visual quality. A lower number (e.g., 60) will result in a much smaller file, while a higher number (e.g., 85) will preserve more detail. For web use, a quality setting between 70 and 80 is often the sweet spot, offering significant size reduction with almost no perceptible loss in quality.
+        </p>
+        
+        <h3 className="text-xl font-semibold text-foreground">Step 3: Compress and Download</h3>
+        <p>
+          Click the 'Compress' button. The tool will process your image in seconds, and a preview of the compressed version will appear on the right. You can instantly see the new file size and the percentage of reduction. If you're happy with the result, click 'Download'. If not, adjust the quality slider and try again. It's that simple to get fast, optimized images for your website or social media.
+        </p>
       </article>
     </div>
   );

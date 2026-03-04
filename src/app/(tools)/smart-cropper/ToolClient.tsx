@@ -91,8 +91,8 @@ export default function SmartCropperClient() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'SoftwareApplication',
-          name: 'Smart Cropper',
-          description: 'Crop images to fit popular social media aspect ratios like 1:1, 9:16, 16:9, and 4:5 with ease.',
+          name: 'Smart Image Cropper',
+          description: 'A free online tool to easily crop images to fit popular social media aspect ratios like 1:1, 9:16, and 16:9.',
           applicationCategory: 'MultimediaApplication',
           operatingSystem: 'Web',
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
@@ -176,36 +176,25 @@ export default function SmartCropperClient() {
       )}
 
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
-        <h2 className="text-2xl font-semibold text-foreground">Perfectly Frame Your Content with the Smart Cropper</h2>
-        <p>In a world dominated by visual content, presentation matters. Every social media platform has its own preferred image dimensions, and a poorly framed photo can ruin the impact of your message. Our Smart Cropper tool empowers you to take control of your visual narrative. Whether you're preparing a post for Instagram's square feed, a vertical story, a wide banner for X (formerly Twitter), or a professional LinkedIn update, our tool makes it effortless to crop your images to the perfect aspect ratio. Stop letting algorithms awkwardly crop your photos and start framing them exactly as you intended.</p>
-        
-        <h3 className="text-xl font-semibold text-foreground">Intuitive Controls for Precision Editing</h3>
-        <p>Our Smart Cropper is designed for both speed and precision. Simply upload your image and select from a list of popular aspect ratios, including 1:1 (square), 9:16 (stories), 16:9 (widescreen), and 4:5 (portrait). The intuitive interface allows you to easily pan, zoom, and rotate the image within the crop area to find the perfect composition. You have full creative control to highlight the most important parts of your image, ensuring your subject is perfectly centered and your message is clear. The entire process is handled within your browser, meaning your images are never uploaded to a server, guaranteeing your privacy and security.</p>
+        <h2 className="text-2xl font-semibold text-foreground">How to Crop a Photo for Any Social Media Platform</h2>
+        <p>
+          Every social media platform has its own preferred image dimensions. A photo that looks great on Instagram's feed might get awkwardly cut off as a Story or a Twitter post. Our Smart Cropper solves this problem by providing presets for the most popular aspect ratios, ensuring your content looks professional everywhere. This guide explains how to frame your shots perfectly.
+        </p>
 
-        <h3 className="text-xl font-semibold text-foreground">Why Aspect Ratios are Crucial for Engagement</h3>
-        <p>Using the correct aspect ratio for each platform is not just about aesthetics; it's about maximizing engagement. Images that are optimized for a specific feed take up more screen real estate, are more visually appealing, and are more likely to be favored by platform algorithms. A perfectly cropped image captures attention and stops the scroll, encouraging likes, comments, and shares. By using our free Smart Cropper tool, you are ensuring your content is presented in the most professional and effective way possible, helping you grow your audience and boost your online presence with every post.</p>
+        <h3 className="text-xl font-semibold text-foreground">Step 1: Upload Your Photo</h3>
+        <p>
+          First, upload the image you want to crop. You can drag and drop it directly onto the page or click to select a file. Your photo will appear in our interactive cropping tool. Because the tool runs entirely in your browser, your original image remains private and is never uploaded to our servers.
+        </p>
         
-        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
-                <AccordionTrigger>Is the Smart Cropper tool free?</AccordionTrigger>
-                <AccordionContent>
-                    Yes, absolutely. Our Smart Cropper is a 100% free online tool. There are no watermarks, sign-ups, or usage limits. Crop as many images as you like, whenever you need to.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-                <AccordionTrigger>Are my images safe?</AccordionTrigger>
-                <AccordionContent>
-                    Your privacy is guaranteed. All cropping is done in your local browser using JavaScript. Your images are never uploaded to our servers, so you retain full control and ownership of your files at all times.
-                </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-                <AccordionTrigger>What does 'aspect ratio' mean?</AccordionTrigger>
-                <AccordionContent>
-                    An aspect ratio describes the proportional relationship between the width and height of an image. For example, a 1:1 aspect ratio is a perfect square, while a 16:9 ratio is a wide rectangle, commonly used for video thumbnails and desktop wallpapers. Choosing the right aspect ratio ensures your image looks its best on different social platforms.
-                </AccordionContent>
-            </AccordionItem>
-        </Accordion>
+        <h3 className="text-xl font-semibold text-foreground">Step 2: Select the Perfect Aspect Ratio</h3>
+        <p>
+          Below the cropper, you'll find buttons for common aspect ratios. Need a square image for your Instagram feed? Click '1:1'. Creating an Instagram Story or TikTok video? Choose '9:16'. For a YouTube thumbnail or Twitter header, '16:9' is your best bet. The crop area will instantly adjust to your selected preset, giving you a perfect frame.
+        </p>
+
+        <h3 className="text-xl font-semibold text-foreground">Step 3: Fine-Tune Your Crop and Download</h3>
+        <p>
+          Use your mouse or trackpad to move the image around within the frame. You can also use the 'Zoom' and 'Rotation' sliders to get the composition just right. Once you've perfectly framed your subject, click the 'Crop Image' button. A preview of your final image will appear. If you're satisfied, click 'Download' to save the new, perfectly-sized image to your device.
+        </p>
       </article>
     </div>
   );

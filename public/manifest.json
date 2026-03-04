@@ -1,21 +1,16 @@
 {
-  "name": "CreatorKit",
+  "name": "CreatorKit - Free Tools for Modern Creators",
   "short_name": "CreatorKit",
-  "description": "A micro-toolkit for modern creators.",
+  "description": "The ultimate free toolkit for content creators. Compress images, convert formats, crop for social media, and generate AI hashtags instantly.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#16181C",
-  "theme_color": "#16181C",
+  "theme_color": "#26A0DA",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
     }
   ]
 }

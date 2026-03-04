@@ -4,12 +4,11 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import Link from 'next/link';
 
-// IMPORTANT: Replace with your actual domain and social media handle.
 const siteConfig = {
   name: 'CreatorKit',
-  description: 'A free micro-toolkit for modern creators. Compress images, generate AI hashtags, crop photos, and convert formats—all in your browser.',
+  description: 'The ultimate free toolkit for content creators. Compress images, convert formats, crop for social media, and generate AI hashtags instantly. Boost your workflow with CreatorKit.',
   url: 'https://kitt-kappa.vercel.app',
-  ogImage: 'https://kitt-kappa.vercel.app/og.png', // Create this image and place it in the /public folder
+  ogImage: 'https://kitt-kappa.vercel.app/og.png',
   twitterHandle: '@yourhandle',
 };
 
@@ -17,10 +16,11 @@ const siteConfig = {
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} - Free Tools for Modern Creators`,
+    default: `${siteConfig.name} - Free Image Tools & AI Hashtag Generator`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: ["image compressor", "hashtag generator", "ai tools", "content creator", "free tools", "image optimizer", "webp converter", "social media tools"],
   manifest: '/manifest.json',
   openGraph: {
     type: 'website',
@@ -62,7 +62,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
-        <meta name="theme-color" content="#16181C" />
+        <meta name="monetag" content="a95b02f7856ca57d18cfdebf4f8978f3" />
         <Script 
            src="https://quge5.com/88/tag.min.js" 
            data-zone="216388" 
