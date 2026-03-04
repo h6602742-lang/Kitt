@@ -10,6 +10,7 @@ import NextImage from 'next/image';
 import { FileUploader } from '@/components/FileUploader';
 import { formatBytes } from '@/lib/utils';
 import AdBanner from '@/components/AdBanner';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 type ConvertedResult = {
   url: string;
@@ -166,6 +167,39 @@ export default function FormatConverterClient() {
           </CardContent>
         </Card>
       )}
+
+      <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
+        <h2 className="text-2xl font-semibold text-foreground">Why Convert Image Formats?</h2>
+        <p>In the digital world, images are everything. They capture attention, convey messages, and enhance user experience. However, not all image formats are created equal. The format you choose can significantly impact your website’s performance, loading speed, and overall visual quality. Our Image Format Converter is a powerful, free tool designed to help you optimize your images for any use case by converting them to modern, efficient formats like WebP, PNG, or the universally compatible JPG.</p>
+        
+        <h3 className="text-xl font-semibold text-foreground">The Power of WebP</h3>
+        <p>WebP is a next-generation image format developed by Google that offers both lossless and lossy compression. This means you can achieve significantly smaller file sizes—often 25-35% smaller than JPEGs—without a noticeable drop in quality. For web developers and content creators, this is a game-changer. Smaller images lead to faster page load times, which directly improves user experience and search engine rankings (SEO). Our converter makes it simple to switch your existing JPEGs and PNGs to WebP, giving your website an instant performance boost.</p>
+
+        <h3 className="text-xl font-semibold text-foreground">When to Use PNG and JPG</h3>
+        <p>While WebP is excellent for the web, PNG and JPG still have their places. PNG (Portable Network Graphics) is the go-to format for images that require transparency, such as logos, icons, and graphics with non-rectangular shapes. Its lossless compression ensures that every pixel is preserved, making it ideal for detailed graphics. JPG (or JPEG) remains the universal standard for photographs. Its lossy compression algorithm is incredibly effective at reducing the file size of complex images with many colors, making it perfect for sharing photos online or via email where compatibility is key.</p>
+        
+        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
+        <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Is this image converter tool free to use?</AccordionTrigger>
+                <AccordionContent>
+                    Yes, absolutely. Our image format converter is completely free to use with no limits. You can convert as many images as you need, directly in your browser.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+                <AccordionTrigger>Is it safe to upload my images here?</AccordionTrigger>
+                <AccordionContent>
+                    Yes, your privacy is our priority. All image processing happens directly in your browser. Your files are never uploaded to our servers, ensuring your data remains private and secure.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+                <AccordionTrigger>What is the best format for my website?</AccordionTrigger>
+                <AccordionContent>
+                    For most web use cases, WebP is the best choice due to its superior compression and quality. It leads to faster load times, which is great for SEO and user experience. Use PNG for images requiring transparency (like logos) and JPG for universal compatibility with older devices.
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+      </article>
     </div>
   );
 }

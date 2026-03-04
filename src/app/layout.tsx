@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
+import Link from 'next/link';
 
 // IMPORTANT: Replace with your actual domain and social media handle.
 const siteConfig = {
@@ -63,17 +64,27 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
         <meta name="theme-color" content="#16181C" />
-      </head>
-      <body className="font-body antialiased">
+         {/* Google AdSense Script - Replace NEXT_PUBLIC_ADSENSE_CLIENT_ID with your actual ID */}
         {process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID && (
-            <Script
+          <Script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID}`}
             crossOrigin="anonymous"
             strategy="afterInteractive"
-            />
+          />
         )}
-        {children}
+      </head>
+      <body className="font-body antialiased">
+        <div className="flex flex-col min-h-screen">
+            <main className="flex-1">{children}</main>
+            <footer className="p-4 text-center text-sm text-muted-foreground border-t">
+               <div className="flex justify-center gap-4">
+                  <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link>
+                  <Link href="/terms" className="hover:text-primary">Terms of Service</Link>
+                </div>
+                <p className="mt-2">Built with ❤️ for the creator community.</p>
+            </footer>
+        </div>
         <Toaster />
       </body>
     </html>

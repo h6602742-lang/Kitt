@@ -33,7 +33,7 @@ const tools = [
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <>
       <header className="p-4 border-b border-border/50">
         <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />
       </header>
@@ -53,10 +53,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <footer className="p-4 text-center text-sm text-muted-foreground">
-        Built with ❤️ for the creator community.
-      </footer>
-    </div>
+    </>
   );
 }
 

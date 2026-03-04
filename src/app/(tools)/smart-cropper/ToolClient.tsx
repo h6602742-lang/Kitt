@@ -12,6 +12,7 @@ import { FileUploader } from '@/components/FileUploader';
 import { getCroppedImg } from './canvasUtils';
 import 'react-easy-crop/react-easy-crop.css';
 import AdBanner from '@/components/AdBanner';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const aspectRatios = [
   { value: 1 / 1, text: '1:1' },
@@ -175,6 +176,39 @@ export default function SmartCropperClient() {
           </CardContent>
         </Card>
       )}
+
+      <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
+        <h2 className="text-2xl font-semibold text-foreground">Perfectly Frame Your Content with the Smart Cropper</h2>
+        <p>In a world dominated by visual content, presentation matters. Every social media platform has its own preferred image dimensions, and a poorly framed photo can ruin the impact of your message. Our Smart Cropper tool empowers you to take control of your visual narrative. Whether you're preparing a post for Instagram's square feed, a vertical story, a wide banner for X (formerly Twitter), or a professional LinkedIn update, our tool makes it effortless to crop your images to the perfect aspect ratio. Stop letting algorithms awkwardly crop your photos and start framing them exactly as you intended.</p>
+        
+        <h3 className="text-xl font-semibold text-foreground">Intuitive Controls for Precision Editing</h3>
+        <p>Our Smart Cropper is designed for both speed and precision. Simply upload your image and select from a list of popular aspect ratios, including 1:1 (square), 9:16 (stories), 16:9 (widescreen), and 4:5 (portrait). The intuitive interface allows you to easily pan, zoom, and rotate the image within the crop area to find the perfect composition. You have full creative control to highlight the most important parts of your image, ensuring your subject is perfectly centered and your message is clear. The entire process is handled within your browser, meaning your images are never uploaded to a server, guaranteeing your privacy and security.</p>
+
+        <h3 className="text-xl font-semibold text-foreground">Why Aspect Ratios are Crucial for Engagement</h3>
+        <p>Using the correct aspect ratio for each platform is not just about aesthetics; it's about maximizing engagement. Images that are optimized for a specific feed take up more screen real estate, are more visually appealing, and are more likely to be favored by platform algorithms. A perfectly cropped image captures attention and stops the scroll, encouraging likes, comments, and shares. By using our free Smart Cropper tool, you are ensuring your content is presented in the most professional and effective way possible, helping you grow your audience and boost your online presence with every post.</p>
+        
+        <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
+        <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1">
+                <AccordionTrigger>Is the Smart Cropper tool free?</AccordionTrigger>
+                <AccordionContent>
+                    Yes, absolutely. Our Smart Cropper is a 100% free online tool. There are no watermarks, sign-ups, or usage limits. Crop as many images as you like, whenever you need to.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+                <AccordionTrigger>Are my images safe?</AccordionTrigger>
+                <AccordionContent>
+                    Your privacy is guaranteed. All cropping is done in your local browser using JavaScript. Your images are never uploaded to our servers, so you retain full control and ownership of your files at all times.
+                </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+                <AccordionTrigger>What does 'aspect ratio' mean?</AccordionTrigger>
+                <AccordionContent>
+                    An aspect ratio describes the proportional relationship between the width and height of an image. For example, a 1:1 aspect ratio is a perfect square, while a 16:9 ratio is a wide rectangle, commonly used for video thumbnails and desktop wallpapers. Choosing the right aspect ratio ensures your image looks its best on different social platforms.
+                </AccordionContent>
+            </AccordionItem>
+        </Accordion>
+      </article>
     </div>
   );
 }

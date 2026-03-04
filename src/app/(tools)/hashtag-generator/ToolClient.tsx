@@ -10,6 +10,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useToast } from '@/hooks/use-toast';
 import AdBanner from '@/components/AdBanner';
 import hashtagData from '@/lib/hashtags.json';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const fallbackHashtags = hashtagData.categories.find(c => c.name === 'trending')?.hashtags || [];
 
@@ -165,6 +166,39 @@ export default function HashtagGeneratorClient() {
         </CardContent>
       </Card>
       {hashtags.length > 0 && <AdBanner dataAdSlot="YOUR_AD_SLOT_ID_HERE" />}
+
+      <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
+          <h2 className="text-2xl font-semibold text-foreground">Boost Your Social Media with the Right Hashtags</h2>
+          <p>In today's fast-paced social media landscape, visibility is key. Hashtags are one of the most powerful tools at your disposal to cut through the noise, reach a wider audience, and increase engagement. The right combination of hashtags can connect your content with users who are actively looking for what you offer, whether it's a product, a service, or a unique perspective. However, manually researching and selecting the most effective hashtags is time-consuming and often based on guesswork. This is where our AI Hashtag Generator comes in.</p>
+
+          <h3 className="text-xl font-semibold text-foreground">How Does AI Revolutionize Hashtag Strategy?</h3>
+          <p>Our tool leverages the power of artificial intelligence to analyze your target keyword and generate a curated list of relevant and trending hashtags in seconds. Instead of just suggesting broad, generic tags, our AI understands context and semantics. It identifies a mix of popular, niche, and long-tail hashtags to maximize your reach. Popular tags get you in front of a large audience, while niche tags connect you with a more targeted, engaged community that is more likely to convert. This balanced approach ensures your content doesn't just get seen—it gets seen by the right people.</p>
+
+          <h3 className="text-xl font-semibold text-foreground">A Data-Driven Approach to Engagement</h3>
+          <p>Stop throwing hashtags at the wall and hoping they stick. Our AI Hashtag Generator provides a data-driven strategy to elevate your social media game. By simply entering a keyword related to your post, you'll receive a diverse set of suggestions that are optimized for platforms like Instagram, TikTok, X (formerly Twitter), and LinkedIn. Whether you're a small business owner, a content creator, or a marketing professional, this free tool will save you valuable time and provide the insights you need to grow your online presence, foster a community, and achieve your social media goals.</p>
+
+          <h2 className="text-2xl font-semibold text-foreground">Frequently Asked Questions</h2>
+          <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                  <AccordionTrigger>Is the AI Hashtag Generator free?</AccordionTrigger>
+                  <AccordionContent>
+                      Yes, our tool is 100% free to use. Our goal is to provide creators and businesses with powerful, accessible tools to help them succeed. There are no hidden fees or usage limits.
+                  </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                  <AccordionTrigger>How many hashtags should I use on my posts?</AccordionTrigger>
+                  <AccordionContent>
+                      The optimal number varies by platform. For Instagram, it's common to use between 10 and 30 hashtags. For platforms like X or Facebook, 2-3 highly relevant hashtags are often more effective. Our tool provides a generous list so you can pick the most relevant ones for your specific post and platform.
+                  </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                  <AccordionTrigger>Does the AI suggest hashtags for different languages?</AccordionTrigger>
+                  <AccordionContent>
+                      Currently, our AI is optimized for English keywords and hashtags. However, it can often recognize popular brand names or terms from other languages. We are working on expanding our multilingual capabilities in the future.
+                  </AccordionContent>
+              </AccordionItem>
+          </Accordion>
+      </article>
     </div>
   );
 }
