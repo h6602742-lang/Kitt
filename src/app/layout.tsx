@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   // Monetag Verification
   other: {
-    "monetag": "YOUR_VERIFICATION_ID",
+    "monetag": "a95b02f7856ca57d18cfdebf4f8978f3",
   },
   openGraph: {
     type: 'website',
