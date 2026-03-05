@@ -47,7 +47,7 @@ export default function BackgroundRemoverClient() {
     let successCount = 0;
     
     const config = {
-      publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.4.1/dist/",
+      publicPath: "https://unpkg.com/@imgly/background-removal@1.4.1/dist/",
       fetchArgs: {
         mode: 'cors',
         credentials: 'omit'
