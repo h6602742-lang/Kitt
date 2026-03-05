@@ -23,13 +23,10 @@ type ProcessedResult = {
 };
 
 const config = {
-  publicPath: "https://cdn.jsdelivr.net/npm/@imgly/background-removal-data@1.5.5/dist/",
+  publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.5.5/dist/",
   fetchArgs: {
-    mode: 'no-cors' as RequestMode,
-    cache: 'force-cache' as RequestCache
-  },
-  device: 'cpu',
-  model: 'small'
+    mode: 'cors' as RequestMode
+  }
 };
 
 export default function BackgroundRemoverClient() {
@@ -64,12 +61,8 @@ export default function BackgroundRemoverClient() {
     setProcessedResults([]);
     setProgress(0);
 
-    if (window.gc) window.gc();
-
     const results: ProcessedResult[] = [];
     let successCount = 0;
-    
-    console.log("Using IMG.LY config:", config);
 
     for (let i = 0; i < originalFiles.length; i++) {
       const file = originalFiles[i];
@@ -98,7 +91,7 @@ export default function BackgroundRemoverClient() {
         toast({
           variant: 'destructive',
           title: 'Processing Error',
-          description: "Network Error: Could not load AI assets. Please ensure you have a stable internet connection.",
+          description: error.message || "AI Assets failed to load. Please check your internet connection.",
         });
       }
       
@@ -207,10 +200,6 @@ export default function BackgroundRemoverClient() {
                 </Button>
               </div>
               {isLoading && <Progress value={progress} className="w-full" />}
-              <div className="mt-4 text-xs text-muted-foreground p-2 border rounded-md bg-muted/20">
-                <p className="font-bold">Debug Info:</p>
-                <span>Fetching model from: <code className="bg-muted px-1 py-0.5 rounded">{config.publicPath}</code></span>
-              </div>
             </div>
           )}
         </CardContent>
