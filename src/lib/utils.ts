@@ -16,3 +16,7 @@ export function formatBytes(bytes: number, decimals = 2) {
 
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
+
+export function pluralize(count: number, singular: string, plural: string) {
+  return count === 1 ? singular : plural;
+}

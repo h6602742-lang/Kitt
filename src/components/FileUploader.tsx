@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 interface FileUploaderProps {
-  onFileSelect: (file: File) => void;
+  onFileSelect: (files: File[]) => void;
   accept?: Record<string, string[]>;
   disabled?: boolean;
 }
@@ -20,12 +20,12 @@ export function FileUploader({ onFileSelect, accept, disabled }: FileUploaderPro
     if (fileRejections.length > 0) {
       toast({
         variant: 'destructive',
-        title: 'Invalid file type',
-        description: 'Please upload a supported image file (PNG, JPG, or WEBP).',
+        title: `${fileRejections.length} files rejected`,
+        description: 'Please upload supported image files (PNG, JPG, or WEBP). You can upload up to 20 files.',
       })
     }
     if (acceptedFiles.length > 0) {
-      onFileSelect(acceptedFiles[0]);
+      onFileSelect(acceptedFiles);
     }
     setIsDragActive(false);
   }, [onFileSelect, toast]);
@@ -33,7 +33,8 @@ export function FileUploader({ onFileSelect, accept, disabled }: FileUploaderPro
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: accept || { 'image/*': ['.jpeg', '.png', '.webp', '.jpg'] },
-    multiple: false,
+    multiple: true,
+    maxFiles: 20,
     onDragEnter: () => setIsDragActive(true),
     onDragLeave: () => setIsDragActive(false),
     disabled
@@ -54,7 +55,7 @@ export function FileUploader({ onFileSelect, accept, disabled }: FileUploaderPro
         <p className="mb-2 text-sm text-muted-foreground">
           <span className="font-semibold text-primary">Click to upload</span> or drag and drop
         </p>
-        <p className="text-xs text-muted-foreground">PNG, JPG, or WEBP</p>
+        <p className="text-xs text-muted-foreground">PNG, JPG, or WEBP (max 20 files)</p>
       </div>
     </div>
   );

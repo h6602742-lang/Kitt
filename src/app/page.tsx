@@ -1,14 +1,32 @@
-import { ArrowRight, Image, Hash, Crop, Repeat } from "lucide-react";
+import { ArrowRight, Image, Hash, Crop, Repeat, Scissors, Wand2 } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 const tools = [
   {
-    title: "Image Compressor",
+    title: "Bulk Image Compressor",
     href: "/image-compressor",
     icon: <Image className="size-8" />,
-    description: "Reduce image file sizes without losing quality. Perfect for web optimization."
+    description: "Reduce image file sizes in bulk without losing quality. Perfect for web optimization."
+  },
+  {
+    title: "AI Background Remover",
+    href: "/background-remover",
+    icon: <Scissors className="size-8" />,
+    description: "Instantly remove the background from up to 20 images at once with a single click."
+  },
+  {
+    title: "Bulk Format Converter",
+    href: "/format-converter",
+    icon: <Repeat className="size-8" />,
+    description: "Convert images to modern formats like WebP, AVIF, PNG, or JPG in bulk."
+  },
+  {
+    title: "AI Hashtag Generator",
+    href: "/hashtag-generator",
+    icon: <Hash className="size-8" />,
+    description: "Generate relevant and trending hashtags for your social media posts using AI."
   },
   {
     title: "Smart Cropper",
@@ -17,16 +35,10 @@ const tools = [
     description: "Crop images to fit social media aspect ratios like 1:1, 9:16, and more."
   },
   {
-    title: "Format Converter",
-    href: "/format-converter",
-    icon: <Repeat className="size-8" />,
-    description: "Convert images to modern formats like WebP, PNG, or JPG for any use case."
-  },
-  {
-    title: "AI Hashtag Generator",
-    href: "/hashtag-generator",
-    icon: <Hash className="size-8" />,
-    description: "Generate relevant and trending hashtags for your social media posts using AI."
+    title: "AI Social Media Optimizer",
+    href: "/social-media-optimizer",
+    icon: <Wand2 className="size-8" />,
+    description: "Rewrite your text into engaging social media posts for any platform using Groq AI."
   },
 ];
 
@@ -57,15 +69,31 @@ export default function Home() {
 }
 
 function ToolCard({ title, href, icon, description, index }: (typeof tools)[0] & { index: number }) {
+  const colors = [
+    "primary",
+    "secondary",
+    "accent",
+    "destructive",
+    "yellow-500",
+    "blue-500"
+  ];
+  
+   const bgClass = `bg-${colors[index % colors.length]}/10`;
+   const textClass = `text-${colors[index % colors.length]}`;
+
   return (
     <Link href={href} className="group block">
       <Card className="h-full transition-all duration-300 ease-in-out hover:border-primary hover:shadow-lg hover:shadow-primary/10 bg-card">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <div className={cn("p-3 rounded-lg", 
-            index === 0 && "bg-primary/10 text-primary",
-            index === 1 && "bg-secondary/10 text-secondary",
-            index === 2 && "bg-accent/10 text-accent",
-            index === 3 && "bg-destructive/10 text-destructive"
+             {
+              'bg-primary/10 text-primary': index === 0,
+              'bg-secondary/10 text-secondary': index === 1,
+              'bg-accent/10 text-accent': index === 2,
+              'bg-destructive/10 text-destructive': index === 3,
+              'bg-yellow-500/10 text-yellow-500': index === 4,
+              'bg-blue-500/10 text-blue-500': index === 5,
+            }
           )}>
             {icon}
           </div>
