@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/format-converter',
     '/hashtag-generator',
     '/qr-generator',
+    '/color-extractor',
+    '/placeholder-generator',
   ];
 
   return routes.map((route) => ({

@@ -1,4 +1,4 @@
-import { ArrowRight, Image, Hash, Crop, Repeat, QrCode } from "lucide-react";
+import { ArrowRight, Image, Hash, Crop, Repeat, QrCode, Palette } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -34,6 +34,18 @@ const tools = [
     icon: <QrCode className="size-8" />,
     description: "Create and customize QR codes for URLs, text, and more. Download as a high-quality PNG."
   },
+  {
+    title: "Color Palette Extractor",
+    href: "/color-extractor",
+    icon: <Palette className="size-8" />,
+    description: "Extract the dominant colors from an image to generate a beautiful color palette."
+  },
+  {
+    title: "Placeholder Generator",
+    href: "/placeholder-generator",
+    icon: <Image className="size-8" />,
+    description: "Create custom placeholder images with specific dimensions, colors, and text."
+  }
 ];
 
 export default function Home() {
@@ -63,30 +75,19 @@ export default function Home() {
 }
 
 function ToolCard({ title, href, icon, description, index }: (typeof tools)[0] & { index: number }) {
-  const colors = [
-    "primary",
-    "secondary",
-    "accent",
-    "destructive",
-    "yellow-500",
-    "blue-500"
-  ];
-  
-   const bgClass = `bg-${colors[index % colors.length]}/10`;
-   const textClass = `text-${colors[index % colors.length]}`;
-
   return (
     <Link href={href} className="group block">
       <Card className="h-full transition-all duration-300 ease-in-out hover:border-primary hover:shadow-lg hover:shadow-primary/10 bg-card">
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <div className={cn("p-3 rounded-lg", 
              {
-              'bg-primary/10 text-primary': index === 0,
-              'bg-secondary/10 text-secondary': index === 1,
-              'bg-accent/10 text-accent': index === 2,
-              'bg-destructive/10 text-destructive': index === 3,
-              'bg-yellow-500/10 text-yellow-500': index === 4,
-              'bg-blue-500/10 text-blue-500': index === 5,
+              'bg-primary/10 text-primary': index % 7 === 0,
+              'bg-secondary/10 text-secondary': index % 7 === 1,
+              'bg-accent/10 text-accent': index % 7 === 2,
+              'bg-destructive/10 text-destructive': index % 7 === 3,
+              'bg-yellow-500/10 text-yellow-500': index % 7 === 4,
+              'bg-blue-500/10 text-blue-500': index % 7 === 5,
+              'bg-green-500/10 text-green-500': index % 7 === 6,
             }
           )}>
             {icon}
