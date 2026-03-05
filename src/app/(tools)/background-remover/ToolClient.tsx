@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Loader2, Download, Scissors, RotateCcw, Archive } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -22,6 +22,17 @@ type ProcessedResult = {
   newSize: number;
 };
 
+const config = {
+  publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.5.5/dist/",
+  fetchArgs: {
+    mode: 'cors',
+    credentials: 'omit',
+    cache: 'no-store' as RequestCache
+  },
+  device: 'cpu',
+  model: 'medium'
+};
+
 export default function BackgroundRemoverClient() {
   const [originalFiles, setOriginalFiles] = useState<File[]>([]);
   const [processedResults, setProcessedResults] = useState<ProcessedResult[]>([]);
@@ -29,6 +40,20 @@ export default function BackgroundRemoverClient() {
   const [isZipping, setIsZipping] = useState(false);
   const [progress, setProgress] = useState(0);
   const { toast } = useToast();
+  
+  const processedResultsRef = useRef(processedResults);
+  processedResultsRef.current = processedResults;
+
+  useEffect(() => {
+    // Cleanup object URLs on unmount
+    return () => {
+      processedResultsRef.current.forEach(result => {
+        URL.revokeObjectURL(result.originalUrl);
+        URL.revokeObjectURL(result.resultUrl);
+      });
+    }
+  }, []);
+
 
   const handleFileSelect = (files: File[]) => {
     setOriginalFiles(files);
@@ -46,15 +71,6 @@ export default function BackgroundRemoverClient() {
     const results: ProcessedResult[] = [];
     let successCount = 0;
     
-    const config = {
-      publicPath: "https://unpkg.com/@imgly/background-removal@1.4.1/dist/",
-      fetchArgs: {
-        mode: 'cors',
-        credentials: 'omit'
-      },
-      device: 'cpu',
-      model: 'medium'
-    };
     console.log("Using IMG.LY config:", config);
 
     for (let i = 0; i < originalFiles.length; i++) {
@@ -132,6 +148,12 @@ export default function BackgroundRemoverClient() {
   };
 
   const handleReset = () => {
+    // Revoke object URLs to free memory
+    processedResults.forEach(result => {
+        URL.revokeObjectURL(result.originalUrl);
+        URL.revokeObjectURL(result.resultUrl);
+    });
+
     setOriginalFiles([]);
     setProcessedResults([]);
     setIsLoading(false);
