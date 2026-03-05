@@ -47,8 +47,9 @@ export default function BackgroundRemoverClient() {
     let successCount = 0;
     
     const config = {
-      publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.1/dist/assets/',
-      device: 'cpu', 
+      publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.5.5/dist/",
+      fetchArgs: { mode: "cors" },
+      device: 'cpu',
     };
 
     for (let i = 0; i < originalFiles.length; i++) {
@@ -77,8 +78,8 @@ export default function BackgroundRemoverClient() {
         console.error(`Background removal failed for ${file.name}:`, error);
         toast({
           variant: 'destructive',
-          title: `Failed to process ${file.name}`,
-          description: "Connection error: Failed to load AI model. Please check your internet or try a smaller image.",
+          title: 'Processing Failed',
+          description: "AI Assets failed to load. Please check your internet connection.",
         });
       }
       
