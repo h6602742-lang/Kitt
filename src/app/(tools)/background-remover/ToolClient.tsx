@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { Loader2, Download, Scissors, RotateCcw, Archive } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import NextImage from 'next/image';
 import { FileUploader } from '@/components/FileUploader';
 import { formatBytes, pluralize } from '@/lib/utils';
-import removeBackground from '@imgly/background-removal';
+import { removeBackground } from '@imgly/background-removal';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 import { Progress } from '@/components/ui/progress';
@@ -18,6 +18,8 @@ type ProcessedResult = {
   originalUrl: string;
   resultUrl: string;
   resultBlob: Blob;
+  originalSize: number;
+  newSize: number;
 };
 
 export default function BackgroundRemoverClient() {
@@ -48,7 +50,7 @@ export default function BackgroundRemoverClient() {
         const resultBlob = await removeBackground(file);
         const originalUrl = URL.createObjectURL(file);
         const resultUrl = URL.createObjectURL(resultBlob);
-        results.push({ originalFile: file, originalUrl, resultUrl, resultBlob });
+        results.push({ originalFile: file, originalUrl, resultUrl, resultBlob, originalSize: file.size, newSize: resultBlob.size });
         setProcessedResults([...results]);
       } catch (error) {
         console.error('Background removal failed for a file:', error);
@@ -92,6 +94,9 @@ export default function BackgroundRemoverClient() {
 
   const hasFiles = originalFiles.length > 0;
   const hasResults = processedResults.length > 0;
+  
+  const totalOriginalSize = processedResults.reduce((acc, r) => acc + r.originalSize, 0);
+  const totalNewSize = processedResults.reduce((acc, r) => acc + r.newSize, 0);
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -140,26 +145,47 @@ export default function BackgroundRemoverClient() {
       </Card>
       
       {hasResults && (
-        <Card>
-          <CardHeader>
-            <h2 className="text-xl font-semibold leading-none tracking-tight">Processed Results</h2>
-          </CardHeader>
-          <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {processedResults.map((result, index) => (
-              <div key={index} className="space-y-2">
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="border rounded-lg p-1 bg-muted/20 overflow-hidden">
-                    <NextImage src={result.originalUrl} alt={`Original ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
-                  </div>
-                  <div className="border rounded-lg p-1 bg-muted/20 overflow-hidden">
-                    <NextImage src={result.resultUrl} alt={`Result ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
-                  </div>
+        <>
+          <Card>
+            <CardHeader>
+              <CardTitle>Processing Summary</CardTitle>
+            </CardHeader>
+            <CardContent className="flex justify-around text-center">
+                <div className="space-y-1">
+                    <p className="text-sm text-muted-foreground">Images</p>
+                    <p className="text-2xl font-bold">{processedResults.length}</p>
                 </div>
-                <p className="text-xs text-muted-foreground truncate">{result.originalFile.name}</p>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
+                <div className="space-y-1">
+                    <p className="text-sm text-muted-foreground">Total Space Saved</p>
+                    <p className="text-2xl font-bold text-success">{formatBytes(totalOriginalSize - totalNewSize)}</p>
+                </div>
+                <div className="space-y-1">
+                    <p className="text-sm text-muted-foreground">Original Size</p>
+                    <p className="text-2xl font-bold">{formatBytes(totalOriginalSize)}</p>
+                </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <h2 className="text-xl font-semibold leading-none tracking-tight">Processed Results</h2>
+            </CardHeader>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {processedResults.map((result, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className="border rounded-lg p-1 bg-muted/20 overflow-hidden">
+                      <NextImage src={result.originalUrl} alt={`Original ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
+                    </div>
+                    <div className="border rounded-lg p-1 bg-muted/20 overflow-hidden">
+                      <NextImage src={result.resultUrl} alt={`Result ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground truncate">{result.originalFile.name}</p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </>
       )}
 
       <article className="prose dark:prose-invert max-w-none space-y-4 text-muted-foreground">
