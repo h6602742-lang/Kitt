@@ -53,6 +53,9 @@ export default function BackgroundRemoverClient() {
     }
   }, []);
 
+  const handleFileSelect = (files: File[]) => {
+    setOriginalFiles(files);
+  };
 
   const handleProcessing = async () => {
     if (originalFiles.length === 0) return;
