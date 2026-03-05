@@ -46,6 +46,7 @@ export default function BackgroundRemoverClient() {
     const results: ProcessedResult[] = [];
     let successCount = 0;
     
+    // Configuration to run the model in a background web worker
     const config = {
       publicPath: 'https://unpkg.com/@imgly/background-removal@1.4.1/dist/assets/'
     };
@@ -55,6 +56,7 @@ export default function BackgroundRemoverClient() {
       try {
         const resultBlob = await removeBackground(file, config);
         
+        // Check if the processing returned a valid blob
         if (!resultBlob || resultBlob.size === 0) {
             throw new Error('Processing failed due to low memory. Please refresh and try a smaller file.');
         }
@@ -81,6 +83,7 @@ export default function BackgroundRemoverClient() {
         });
       }
       
+      // Update progress and results after each file
       setProgress(((i + 1) / originalFiles.length) * 100);
       setProcessedResults([...results]);
     }
@@ -178,8 +181,8 @@ export default function BackgroundRemoverClient() {
                 <Button onClick={handleProcessing} disabled={isLoading || isZipping} className="w-full sm:w-auto flex-1 bg-accent text-accent-foreground hover:bg-accent/90">
                   {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</> : <><Scissors className="mr-2 h-4 w-4" /> Remove Backgrounds</>}
                 </Button>
-                {hasResults && (
-                  <Button onClick={handleDownloadZip} disabled={isZipping || isLoading} className="w-full sm:w-auto">
+                {hasResults && !isLoading && (
+                  <Button onClick={handleDownloadZip} disabled={isZipping} className="w-full sm:w-auto">
                     {isZipping ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Zipping...</> : <><Archive className="mr-2 h-4 w-4" /> Download as ZIP</>}
                   </Button>
                 )}
