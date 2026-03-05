@@ -44,23 +44,52 @@ export default function BackgroundRemoverClient() {
     setProgress(0);
 
     const results: ProcessedResult[] = [];
-    for (let i = 0; i < originalFiles.length; i++) {
-      const file = originalFiles[i];
-      try {
-        const resultBlob = await removeBackground(file);
-        const originalUrl = URL.createObjectURL(file);
-        const resultUrl = URL.createObjectURL(resultBlob);
-        results.push({ originalFile: file, originalUrl, resultUrl, resultBlob, originalSize: file.size, newSize: resultBlob.size });
-        setProcessedResults([...results]);
-      } catch (error) {
-        console.error('Background removal failed for a file:', error);
-        toast({ variant: 'destructive', title: `Failed to process ${file.name}` });
+    try {
+      for (let i = 0; i < originalFiles.length; i++) {
+        const file = originalFiles[i];
+        try {
+          const resultBlob = await removeBackground(file);
+          const originalUrl = URL.createObjectURL(file);
+          const resultUrl = URL.createObjectURL(resultBlob);
+          results.push({
+            originalFile: file,
+            originalUrl,
+            resultUrl,
+            resultBlob,
+            originalSize: file.size,
+            newSize: resultBlob.size
+          });
+          setProcessedResults([...results]);
+        } catch (error) {
+          console.error('Background removal failed for a file:', error);
+          toast({
+            variant: 'destructive',
+            title: `Failed to process ${file.name}`,
+            description: 'Please try a smaller image. Large files can cause the process to fail.',
+          });
+        }
+        setProgress(((i + 1) / originalFiles.length) * 100);
       }
-      setProgress(((i + 1) / originalFiles.length) * 100);
-    }
 
-    toast({ variant: 'success', title: 'Processing Complete!', description: `${results.length} ${pluralize(results.length, 'image', 'images')} processed.` });
-    setIsLoading(false);
+      const successCount = results.length;
+      if (successCount > 0) {
+        toast({
+          variant: 'success',
+          title: 'Processing Complete!',
+          description: `${successCount} ${pluralize(successCount, 'image', 'images')} processed.`
+        });
+      }
+
+      if (successCount === 0 && originalFiles.length > 0) {
+        toast({
+          variant: 'destructive',
+          title: 'Processing Failed',
+          description: 'Could not process any of the selected images.',
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleDownloadZip = async () => {
