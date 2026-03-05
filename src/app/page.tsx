@@ -1,4 +1,4 @@
-import { ArrowRight, Image, Hash, Crop, Repeat } from "lucide-react";
+import { ArrowRight, Image, Hash, Crop, Repeat, QrCode } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -27,6 +27,12 @@ const tools = [
     href: "/smart-cropper",
     icon: <Crop className="size-8" />,
     description: "Crop images to fit social media aspect ratios like 1:1, 9:16, and more."
+  },
+  {
+    title: "QR Code Generator",
+    href: "/qr-generator",
+    icon: <QrCode className="size-8" />,
+    description: "Create and customize QR codes for URLs, text, and more. Download as a high-quality PNG."
   },
 ];
 
