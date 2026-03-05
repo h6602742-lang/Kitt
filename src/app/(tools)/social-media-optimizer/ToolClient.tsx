@@ -62,6 +62,18 @@ export default function SocialMediaOptimizerClient() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'AI Social Media Post Optimizer',
+          description: 'Use AI to rewrite your text into engaging, professional posts for Facebook, Instagram, and LinkedIn. Powered by Groq.',
+          applicationCategory: 'DesignApplication',
+          operatingSystem: 'Web',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        })}}
+      />
       <Card>
         <CardHeader>
           <h1 className="font-headline text-2xl font-semibold leading-none tracking-tight">AI Social Media Optimizer</h1>

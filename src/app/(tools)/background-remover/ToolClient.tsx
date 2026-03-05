@@ -95,6 +95,18 @@ export default function BackgroundRemoverClient() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'AI Background Remover',
+          description: 'Instantly remove the background from any image with a single click. Free, private, and supports bulk processing.',
+          applicationCategory: 'MultimediaApplication',
+          operatingSystem: 'Web',
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        })}}
+      />
       <Card>
         <CardHeader>
           <h1 className="font-headline text-2xl font-semibold leading-none tracking-tight">AI Background Remover</h1>

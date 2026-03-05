@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ["image compressor", "hashtag generator", "ai tools", "content creator", "free tools", "image optimizer", "webp converter", "social media tools"],
+  keywords: ["image compressor", "hashtag generator", "ai tools", "content creator", "free tools", "image optimizer", "webp converter", "social media tools", "background remover", "image cropper"],
   manifest: '/manifest.json',
   openGraph: {
     type: 'website',
