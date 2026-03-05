@@ -11,8 +11,8 @@ export async function POST(request: Request) {
   }
 
   if (!apiToken || !apiToken.startsWith('gsk_')) {
-    console.error('Groq API token is missing or invalid.');
-    return NextResponse.json({ error: 'AI service is not configured on the server.' }, { status: 500 });
+    console.error('Groq API token is missing or invalid. Returning original text.');
+    return NextResponse.json({ optimizedText: text });
   }
 
   const prompt = `You are a viral social media marketing expert named 'Kitt'. Your goal is to rewrite user-provided text to maximize engagement on platforms like Instagram, Facebook, and LinkedIn. When rewriting, you should:
@@ -42,24 +42,24 @@ Now, rewrite the following text: "${text}"`;
     });
 
     if (!response.ok) {
-      console.error(`Groq API request failed with status ${response.status}.`);
+      console.error(`Groq API request failed with status ${response.status}. Returning original text.`);
       const errorBody = await response.text();
       console.error("Error Body:", errorBody);
-      return NextResponse.json({ error: 'Failed to get a response from the AI service.' }, { status: 502 });
+      return NextResponse.json({ optimizedText: text });
     }
 
     const result = await response.json();
     const optimizedText = result.choices?.[0]?.message?.content;
 
     if (!optimizedText) {
-      console.error("Invalid response format from Groq API.");
-      return NextResponse.json({ error: 'AI returned an invalid response.' }, { status: 502 });
+      console.error("Invalid response format from Groq API. Returning original text.");
+      return NextResponse.json({ optimizedText: text });
     }
 
     return NextResponse.json({ optimizedText: optimizedText.trim() });
 
   } catch (e: any) {
     console.error("An unexpected error occurred while calling Groq API:", e.message);
-    return NextResponse.json({ error: 'An unexpected error occurred.' }, { status: 500 });
+    return NextResponse.json({ optimizedText: text });
   }
 }

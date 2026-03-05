@@ -34,18 +34,36 @@ export default function SocialMediaOptimizerClient() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'An unknown error occurred.');
+        toast({
+          variant: 'destructive',
+          title: 'Optimization Failed',
+          description: data.error || 'An unexpected server error occurred.',
+        });
+        setOutputText(inputText); // Fallback to original text
+        return;
       }
       
       setOutputText(data.optimizedText);
-      toast({ variant: 'success', title: 'Content Optimized!' });
+      
+      if (data.optimizedText !== inputText) {
+        toast({ variant: 'success', title: 'Content Optimized!' });
+      } else {
+        // This case now implies the AI service failed and returned the original text.
+        toast({
+            variant: "destructive",
+            title: 'AI Service Error',
+            description: "The AI optimizer is currently unavailable. Please try again later."
+        });
+      }
+
     } catch (e: any) {
       console.error("Error fetching from API route:", e);
       toast({
         variant: 'destructive',
-        title: 'AI Generation Failed',
+        title: 'Network Error',
         description: e.message || 'Could not connect to the AI service.',
       });
+      setOutputText(inputText); // Fallback to original text
     } finally {
       setIsLoading(false);
     }
