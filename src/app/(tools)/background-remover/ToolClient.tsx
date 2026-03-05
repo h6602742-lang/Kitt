@@ -48,16 +48,21 @@ export default function BackgroundRemoverClient() {
     
     const config = {
       publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.5.5/dist/",
-      fetchArgs: { mode: "cors" },
+      fetchArgs: {
+        mode: 'cors',
+        credentials: 'omit'
+      },
       device: 'cpu',
+      model: 'medium'
     };
+    console.log("Using IMG.LY config:", config);
 
     for (let i = 0; i < originalFiles.length; i++) {
       const file = originalFiles[i];
       try {
         const resultBlob = await removeBackground(file, config);
         
-        if (!resultBlob || resultBlob.size === 0) {
+        if (!(resultBlob instanceof Blob) || resultBlob.size === 0) {
             throw new Error('Processing failed due to low memory. Please refresh and try a smaller file.');
         }
 
@@ -78,8 +83,8 @@ export default function BackgroundRemoverClient() {
         console.error(`Background removal failed for ${file.name}:`, error);
         toast({
           variant: 'destructive',
-          title: 'Processing Failed',
-          description: "AI Assets failed to load. Please check your internet connection.",
+          title: 'Processing Error',
+          description: "Network Error: Could not load AI assets. Please ensure you have a stable internet connection.",
         });
       }
       
@@ -92,14 +97,6 @@ export default function BackgroundRemoverClient() {
         variant: 'success',
         title: 'Processing Complete!',
         description: `${successCount} ${pluralize(successCount, 'image', 'images')} processed successfully.`
-      });
-    }
-
-    if (successCount === 0 && originalFiles.length > 0) {
-      toast({
-        variant: 'destructive',
-        title: 'Processing Failed',
-        description: 'Could not process any of the selected images. Please try again with smaller files.',
       });
     }
 
