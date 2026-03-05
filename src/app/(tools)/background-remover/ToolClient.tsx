@@ -23,14 +23,13 @@ type ProcessedResult = {
 };
 
 const config = {
-  publicPath: "https://static.imgly.com/packages/@imgly/background-removal/1.5.5/dist/",
+  publicPath: "https://cdn.jsdelivr.net/npm/@imgly/background-removal-data@1.5.5/dist/",
   fetchArgs: {
-    mode: 'cors',
-    credentials: 'omit',
-    cache: 'no-store' as RequestCache
+    mode: 'no-cors' as RequestMode,
+    cache: 'force-cache' as RequestCache
   },
   device: 'cpu',
-  model: 'medium'
+  model: 'small'
 };
 
 export default function BackgroundRemoverClient() {
@@ -55,18 +54,14 @@ export default function BackgroundRemoverClient() {
   }, []);
 
 
-  const handleFileSelect = (files: File[]) => {
-    setOriginalFiles(files);
-    setProcessedResults([]);
-    setProgress(0);
-  };
-
   const handleProcessing = async () => {
     if (originalFiles.length === 0) return;
 
     setIsLoading(true);
     setProcessedResults([]);
     setProgress(0);
+
+    if (window.gc) window.gc();
 
     const results: ProcessedResult[] = [];
     let successCount = 0;
@@ -209,6 +204,10 @@ export default function BackgroundRemoverClient() {
                 </Button>
               </div>
               {isLoading && <Progress value={progress} className="w-full" />}
+              <div className="mt-4 text-xs text-muted-foreground p-2 border rounded-md bg-muted/20">
+                <p className="font-bold">Debug Info:</p>
+                <span>Fetching model from: <code className="bg-muted px-1 py-0.5 rounded">{config.publicPath}</code></span>
+              </div>
             </div>
           )}
         </CardContent>
