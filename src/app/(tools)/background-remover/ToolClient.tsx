@@ -46,9 +46,9 @@ export default function BackgroundRemoverClient() {
     const results: ProcessedResult[] = [];
     let successCount = 0;
     
-    // Configuration to run the model in a background web worker
     const config = {
-      publicPath: 'https://unpkg.com/@imgly/background-removal@1.4.1/dist/assets/'
+      publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.1/dist/assets/',
+      device: 'cpu', 
     };
 
     for (let i = 0; i < originalFiles.length; i++) {
@@ -56,7 +56,6 @@ export default function BackgroundRemoverClient() {
       try {
         const resultBlob = await removeBackground(file, config);
         
-        // Check if the processing returned a valid blob
         if (!resultBlob || resultBlob.size === 0) {
             throw new Error('Processing failed due to low memory. Please refresh and try a smaller file.');
         }
@@ -79,11 +78,10 @@ export default function BackgroundRemoverClient() {
         toast({
           variant: 'destructive',
           title: `Failed to process ${file.name}`,
-          description: error.message || 'Please try a smaller or different image.',
+          description: "Connection error: Failed to load AI model. Please check your internet or try a smaller image.",
         });
       }
       
-      // Update progress and results after each file
       setProgress(((i + 1) / originalFiles.length) * 100);
       setProcessedResults([...results]);
     }
