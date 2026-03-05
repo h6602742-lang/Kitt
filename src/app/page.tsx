@@ -1,4 +1,4 @@
-import { ArrowRight, Image, Hash, Crop, Repeat, Scissors, Wand2 } from "lucide-react";
+import { ArrowRight, Image, Hash, Crop, Repeat } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -9,12 +9,6 @@ const tools = [
     href: "/image-compressor",
     icon: <Image className="size-8" />,
     description: "Reduce image file sizes in bulk without losing quality. Perfect for web optimization."
-  },
-  {
-    title: "AI Background Remover",
-    href: "/background-remover",
-    icon: <Scissors className="size-8" />,
-    description: "Instantly remove the background from up to 20 images at once with a single click."
   },
   {
     title: "Bulk Format Converter",
@@ -33,12 +27,6 @@ const tools = [
     href: "/smart-cropper",
     icon: <Crop className="size-8" />,
     description: "Crop images to fit social media aspect ratios like 1:1, 9:16, and more."
-  },
-  {
-    title: "AI Social Media Optimizer",
-    href: "/social-media-optimizer",
-    icon: <Wand2 className="size-8" />,
-    description: "Rewrite your text into engaging social media posts for any platform using Groq AI."
   },
 ];
 

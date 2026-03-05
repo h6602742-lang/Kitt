@@ -9,8 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/smart-cropper',
     '/format-converter',
     '/hashtag-generator',
-    '/background-remover',
-    '/social-media-optimizer',
   ];
 
   return routes.map((route) => ({
