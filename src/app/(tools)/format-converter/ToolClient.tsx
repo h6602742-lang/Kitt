@@ -145,7 +145,7 @@ export default function FormatConverterClient() {
       />
       <Card>
         <CardHeader>
-          <h1 className="font-headline text-2xl font-semibold leading-none tracking-tight">Image Format Converter</h1>
+          <CardTitle>Image Format Converter</CardTitle>
           <CardDescription>Convert your images to WebP, AVIF, PNG, or JPG formats. Process up to 20 images at once.</CardDescription>
         </CardHeader>
         <CardContent>

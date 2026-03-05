@@ -44,52 +44,71 @@ export default function BackgroundRemoverClient() {
     setProgress(0);
 
     const results: ProcessedResult[] = [];
-    try {
-      for (let i = 0; i < originalFiles.length; i++) {
-        const file = originalFiles[i];
-        try {
-          const resultBlob = await removeBackground(file);
-          const originalUrl = URL.createObjectURL(file);
-          const resultUrl = URL.createObjectURL(resultBlob);
-          results.push({
-            originalFile: file,
-            originalUrl,
-            resultUrl,
-            resultBlob,
-            originalSize: file.size,
-            newSize: resultBlob.size
-          });
-          setProcessedResults([...results]);
-        } catch (error) {
-          console.error('Background removal failed for a file:', error);
-          toast({
-            variant: 'destructive',
-            title: `Failed to process ${file.name}`,
-            description: 'Please try a smaller image. Large files can cause the process to fail.',
-          });
+    let successCount = 0;
+    
+    const config = {
+      publicPath: 'https://unpkg.com/@imgly/background-removal@1.4.1/dist/assets/'
+    };
+
+    for (let i = 0; i < originalFiles.length; i++) {
+      const file = originalFiles[i];
+      try {
+        const resultBlob = await removeBackground(file, config);
+        
+        if (!resultBlob || resultBlob.size === 0) {
+            throw new Error('Processing failed due to low memory. Please refresh and try a smaller file.');
         }
-        setProgress(((i + 1) / originalFiles.length) * 100);
-      }
 
-      const successCount = results.length;
-      if (successCount > 0) {
-        toast({
-          variant: 'success',
-          title: 'Processing Complete!',
-          description: `${successCount} ${pluralize(successCount, 'image', 'images')} processed.`
+        const originalUrl = URL.createObjectURL(file);
+        const resultUrl = URL.createObjectURL(resultBlob);
+        
+        results.push({
+          originalFile: file,
+          originalUrl,
+          resultUrl,
+          resultBlob,
+          originalSize: file.size,
+          newSize: resultBlob.size
         });
-      }
-
-      if (successCount === 0 && originalFiles.length > 0) {
+        successCount++;
+        
+      } catch (error: any) {
+        console.error(`Background removal failed for ${file.name}:`, error);
         toast({
           variant: 'destructive',
-          title: 'Processing Failed',
-          description: 'Could not process any of the selected images.',
+          title: `Failed to process ${file.name}`,
+          description: error.message || 'Please try a smaller or different image.',
         });
       }
-    } finally {
-      setIsLoading(false);
+      
+      setProgress(((i + 1) / originalFiles.length) * 100);
+      setProcessedResults([...results]);
     }
+
+    if (successCount > 0) {
+      toast({
+        variant: 'success',
+        title: 'Processing Complete!',
+        description: `${successCount} ${pluralize(successCount, 'image', 'images')} processed successfully.`
+      });
+    }
+
+    if (successCount === 0 && originalFiles.length > 0) {
+      toast({
+        variant: 'destructive',
+        title: 'Processing Failed',
+        description: 'Could not process any of the selected images. Please try again with smaller files.',
+      });
+    }
+
+    setIsLoading(false);
+  };
+  
+  const handleDownload = (result: ProcessedResult) => {
+    const originalName = result.originalFile.name;
+    const fileExtension = originalName.slice(originalName.lastIndexOf('.'));
+    const newName = originalName.replace(fileExtension, '_bg_removed.png');
+    saveAs(result.resultBlob, newName);
   };
 
   const handleDownloadZip = async () => {
@@ -126,6 +145,7 @@ export default function BackgroundRemoverClient() {
   
   const totalOriginalSize = processedResults.reduce((acc, r) => acc + r.originalSize, 0);
   const totalNewSize = processedResults.reduce((acc, r) => acc + r.newSize, 0);
+  const spaceSaved = totalOriginalSize - totalNewSize;
 
   return (
     <div className="max-w-6xl mx-auto space-y-8">
@@ -143,7 +163,7 @@ export default function BackgroundRemoverClient() {
       />
       <Card>
         <CardHeader>
-          <h1 className="font-headline text-2xl font-semibold leading-none tracking-tight">AI Background Remover</h1>
+          <CardTitle>AI Background Remover</CardTitle>
           <CardDescription>Remove the background from up to 20 images at once with a single click.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -186,7 +206,7 @@ export default function BackgroundRemoverClient() {
                 </div>
                 <div className="space-y-1">
                     <p className="text-sm text-muted-foreground">Total Space Saved</p>
-                    <p className="text-2xl font-bold text-success">{formatBytes(totalOriginalSize - totalNewSize)}</p>
+                    <p className="text-2xl font-bold text-success">{spaceSaved > 0 ? formatBytes(spaceSaved) : '0 Bytes'}</p>
                 </div>
                 <div className="space-y-1">
                     <p className="text-sm text-muted-foreground">Original Size</p>
@@ -196,11 +216,11 @@ export default function BackgroundRemoverClient() {
           </Card>
           <Card>
             <CardHeader>
-              <h2 className="text-xl font-semibold leading-none tracking-tight">Processed Results</h2>
+              <CardTitle>Processed Results</CardTitle>
             </CardHeader>
             <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {processedResults.map((result, index) => (
-                <div key={index} className="space-y-2">
+                <div key={index} className="space-y-4">
                   <div className="grid grid-cols-2 gap-2">
                     <div className="border rounded-lg p-1 bg-muted/20 overflow-hidden">
                       <NextImage src={result.originalUrl} alt={`Original ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
@@ -209,7 +229,13 @@ export default function BackgroundRemoverClient() {
                       <NextImage src={result.resultUrl} alt={`Result ${index + 1}`} width={200} height={200} className="w-full h-auto object-contain rounded-md" />
                     </div>
                   </div>
-                  <p className="text-xs text-muted-foreground truncate">{result.originalFile.name}</p>
+                  <div className="space-y-2">
+                    <p className="text-xs text-muted-foreground truncate">{result.originalFile.name}</p>
+                    <Button onClick={() => handleDownload(result)} size="sm" className="w-full">
+                        <Download className="mr-2 h-4 w-4" />
+                        Download
+                    </Button>
+                  </div>
                 </div>
               ))}
             </CardContent>
@@ -235,7 +261,7 @@ export default function BackgroundRemoverClient() {
 
         <h3 className="text-xl font-semibold text-foreground">Step 3: Download Your Results</h3>
         <p>
-          Once the processing is complete, you can download all your new images (now in PNG format to preserve transparency) conveniently packaged in a single ZIP file. This saves you the time of downloading each image individually and keeps your workflow efficient. It's the perfect solution for creators who need to process images in bulk.
+          Once the processing is complete, you can download each image individually or download all your new images (now in PNG format to preserve transparency) conveniently packaged in a single ZIP file. This saves you time and keeps your workflow efficient.
         </p>
       </article>
     </div>
